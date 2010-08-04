@@ -68,5 +68,11 @@ static void sqlite3_regexp( sqlite3_context *context, int argc, sqlite3_value **
 
 int sqlite3_extension_init( sqlite3 *db, char **pzErrMsg, const sqlite3_api_routines *pApi ) {
 	SQLITE_EXTENSION_INIT2(pApi)
+	int code;
+	if( pcre_config(PCRE_CONFIG_UTF8, &code) != 0 ) assert(0);
+	if( code != 1 ) {
+		if( pzErrMsg ) *pzErrMsg = sqlite3_mprintf("PCRE does not support UTF-8");
+		return SQLITE_ERROR;
+	}
 	return sqlite3_create_function(db, "regexp", 2, SQLITE_UTF8, 0, sqlite3_regexp, 0, 0);
 }
