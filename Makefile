@@ -12,7 +12,7 @@ LIBS = -lpcre
 
 all: regexp.sqlext
 
-regexp.sqlext: $(OBJECTS)
+$(EXTENSIONS): %.sqlext: $(OBJECTS)
 	$(CC) -shared -fPIC $(CFLAGS) $(LDFLAGS) -o $@ $<
 
 clean:
