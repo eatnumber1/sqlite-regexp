@@ -12,8 +12,8 @@ LIBS = -lpcre
 
 all: regexp.sqlext
 
-$(EXTENSIONS): %.sqlext: $(OBJECTS)
-	$(CC) -shared -fPIC $(CFLAGS) $(LDFLAGS) -o $@ $<
-
 clean:
 	$(RM) $(OBJECTS) $(EXTENSIONS)
+
+$(EXTENSIONS): %.sqlext: $(OBJECTS)
+	$(CC) -shared -fPIC $(CFLAGS) $(LDFLAGS) -o $@ $<
