@@ -16,4 +16,4 @@ clean:
 	$(RM) $(OBJECTS) $(EXTENSIONS)
 
 $(EXTENSIONS): %.sqlext: $(OBJECTS)
-	$(CC) -shared -fPIC $(CFLAGS) $(LDFLAGS) -o $@ $<
+	$(CC) $(LIBS) -shared -fPIC $(CFLAGS) $(LDFLAGS) -o $@ $<
