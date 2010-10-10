@@ -54,8 +54,11 @@ static void sqlite3_regexp( sqlite3_context *context, int argc, sqlite3_value **
 					break;
 				default:
 					errmsg = sqlite3_mprintf("pcre_exec: Error code %d\n", pcre_errcode);
-					if( errmsg == NULL ) sqlite3_result_error_nomem(context);
-					sqlite3_result_error(context, errmsg, strlen(errmsg));
+					if( errmsg == NULL ) {
+						sqlite3_result_error_nomem(context);
+					} else {
+						sqlite3_result_error(context, errmsg, strlen(errmsg));
+					}
 					sqlite3_free(errmsg);
 			}
 		} else {
