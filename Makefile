@@ -2,9 +2,6 @@ SOURCES = regexp.c
 OBJECTS = $(SOURCES:.c=.o)
 EXTENSIONS = regexp.sqlext
 
-LDFLAGS ?= -Wl,-O5,--as-needed
-CFLAGS ?= -O3 -pipe
-
 CFLAGS += -fPIC -Isqlite3 -Wall
 LIBS = -lpcre
 
@@ -16,4 +13,4 @@ clean:
 	$(RM) $(OBJECTS) $(EXTENSIONS)
 
 $(EXTENSIONS): %.sqlext: $(OBJECTS)
-	$(CC) $(LIBS) -shared -fPIC $(CFLAGS) $(LDFLAGS) -o $@ $<
+	$(CC) $(LIBS) -shared $(CFLAGS) $(LDFLAGS) -o $@ $<
